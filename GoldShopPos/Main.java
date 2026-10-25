@@ -22,8 +22,10 @@ public class Main {
 
         CustomerDAO dao = new CustomerDAO();
 
-        if (dao.addCustomer(customer)) {
-            System.out.println("\nCustomer saved successfully!");
+        int id = dao.addCustomer(customer);
+
+        if (id > 0) {
+            System.out.println("\nCustomer saved successfully! Customer ID: " + id);
         } else {
             System.out.println("\nCustomer could not be saved.");
         }
