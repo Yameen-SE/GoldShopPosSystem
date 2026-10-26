@@ -12,21 +12,27 @@ public class Main {
         while (true) {
             System.out.println("\n=== Gold Shop Management System ===");
             System.out.println("1. Add Customer");
-            System.out.println("2. Add Category");
-            System.out.println("3. View Categories");
-            System.out.println("4. Update Category");
-            System.out.println("5. Delete Category");
+            System.out.println("2. View Customer");
+            System.out.println("3. Update Customer");
+            System.out.println("4. Delete Customer");
+            System.out.println("5. Add Category");
+            System.out.println("6. View Categories");
+            System.out.println("7. Update Category");
+            System.out.println("8. Delete Category");
             System.out.println("0. Exit");
             System.out.print("Choose: ");
 
             int choice = readInt();
 
             switch (choice) {
-                case 1: addCustomer();   break;
-                case 2: addCategory();   break;
-                case 3: viewCategories(); break;
-                case 4: updateCategory(); break;
-                case 5: deleteCategory(); break;
+                case 1: addCustomer();      break;
+                case 2: viewCustomer();     break;
+                case 3: updateCustomer();   break;
+                case 4: deleteCustomer();   break;
+                case 5: addCategory();      break;
+                case 6: viewCategories();   break;
+                case 7: updateCategory();   break;
+                case 8: deleteCategory();   break;
                 case 0:
                     System.out.println("Goodbye!");
                     sc.close();
@@ -37,13 +43,15 @@ public class Main {
         }
     }
 
+    // ================= CUSTOMER =================
+
     static void addCustomer() {
         System.out.print("Enter Customer Name: ");
-        String name = sc.nextLine().trim();
+        String name = sc.nextLine();
         System.out.print("Enter Phone Number: ");
-        String phone = sc.nextLine().trim();
+        String phone = sc.nextLine();
         System.out.print("Enter Address: ");
-        String address = sc.nextLine().trim();
+        String address = sc.nextLine();
 
         if (name.isEmpty()) {
             System.out.println("Name cannot be empty.");
@@ -53,14 +61,72 @@ public class Main {
         Customer customer = new Customer(name, phone, address);
         int id = customerDAO.addCustomer(customer);
 
-        System.out.println(id > 0
-                ? "Customer saved! ID: " + id
-                : "Customer could not be saved.");
+        if (id > 0) {
+            System.out.println("Customer saved! ID: " + id);
+        } else {
+            System.out.println("Customer could not be saved.");
+        }
     }
+
+    static void viewCustomer() {
+        List<Customer> list = customerDAO.getAllCustomers();
+
+        if (list.isEmpty()) {
+            System.out.println("No customers found.");
+            return;
+        }
+
+        System.out.println("\nID\tName\t\tPhone\t\tAddress");
+        System.out.println("------------------------------------------------");
+        for (Customer c : list) {
+            System.out.println(c.getCustomerId() + "\t"
+                    + c.getCustomerName() + "\t\t"
+                    + c.getPhone() + "\t"
+                    + c.getAddress());
+        }
+    }
+
+    static void updateCustomer() {
+        System.out.print("Enter Customer ID to update: ");
+        int id = readInt();
+
+        System.out.print("Enter new Name: ");
+        String name = sc.nextLine();
+        System.out.print("Enter new Phone: ");
+        String phone = sc.nextLine();
+        System.out.print("Enter new Address: ");
+        String address = sc.nextLine();
+
+        if (name.isEmpty()) {
+            System.out.println("Name cannot be empty.");
+            return;
+        }
+
+        boolean ok = customerDAO.updateCustomer(new Customer(id, name, phone, address));
+        if (ok) {
+            System.out.println("Customer updated.");
+        } else {
+            System.out.println("Update failed (ID not found?).");
+        }
+    }
+
+    static void deleteCustomer() {
+        System.out.print("Enter Customer ID to delete: ");
+        int id = readInt();
+
+        boolean ok = customerDAO.deleteCustomer(id);
+        if (ok) {
+            System.out.println("Customer deleted.");
+        } else {
+            System.out.println("Delete failed (ID not found or in use).");
+        }
+    }
+
+    // ================= CATEGORY =================
 
     static void addCategory() {
         System.out.print("Enter Category Name: ");
-        String name = sc.nextLine().trim();
+        String name = sc.nextLine();
 
         if (name.isEmpty()) {
             System.out.println("Name cannot be empty.");
@@ -69,9 +135,11 @@ public class Main {
 
         int id = categoryDAO.addCategory(new Category(name));
 
-        System.out.println(id > 0
-                ? "Category saved! ID: " + id
-                : "Category could not be saved.");
+        if (id > 0) {
+            System.out.println("Category saved! ID: " + id);
+        } else {
+            System.out.println("Category could not be saved.");
+        }
     }
 
     static void viewCategories() {
@@ -93,10 +161,14 @@ public class Main {
         System.out.print("Enter Category ID to update: ");
         int id = readInt();
         System.out.print("Enter new name: ");
-        String name = sc.nextLine().trim();
+        String name = sc.nextLine();
 
         boolean ok = categoryDAO.updateCategory(new Category(id, name));
-        System.out.println(ok ? "Category updated." : "Update failed (ID not found?).");
+        if (ok) {
+            System.out.println("Category updated.");
+        } else {
+            System.out.println("Update failed (ID not found?).");
+        }
     }
 
     static void deleteCategory() {
@@ -104,12 +176,16 @@ public class Main {
         int id = readInt();
 
         boolean ok = categoryDAO.deleteCategory(id);
-        System.out.println(ok ? "Category deleted." : "Delete failed (ID not found or in use).");
+        if (ok) {
+            System.out.println("Category deleted.");
+        } else {
+            System.out.println("Delete failed (ID not found or in use).");
+        }
     }
-
+    
     static int readInt() {
         try {
-            return Integer.parseInt(sc.nextLine().trim());
+            return Integer.parseInt(sc.nextLine());
         } catch (NumberFormatException e) {
             return -1;
         }
