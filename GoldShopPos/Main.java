@@ -53,11 +53,11 @@ public class Main {
 
     static void addCustomer() {
         System.out.print("Enter Customer Name: ");
-        String name = sc.nextLine().trim();
+        String name = sc.nextLine();
         System.out.print("Enter Phone Number: ");
-        String phone = sc.nextLine().trim();
+        String phone = sc.nextLine();
         System.out.print("Enter Address: ");
-        String address = sc.nextLine().trim();
+        String address = sc.nextLine();
 
         if (name.isEmpty()) {
             System.out.println("Name cannot be empty.");
@@ -97,7 +97,7 @@ public class Main {
 
     static void searchCustomerByName() {
         System.out.print("Enter Customer Name to search: ");
-        String name = sc.nextLine().trim();
+        String name = sc.nextLine();
 
         if (name.isEmpty()) {
             System.out.println("Name cannot be empty.");
@@ -118,11 +118,11 @@ public class Main {
         int id = readInt();
 
         System.out.print("Enter new Name: ");
-        String name = sc.nextLine().trim();
+        String name = sc.nextLine();
         System.out.print("Enter new Phone: ");
-        String phone = sc.nextLine().trim();
+        String phone = sc.nextLine();
         System.out.print("Enter new Address: ");
-        String address = sc.nextLine().trim();
+        String address = sc.nextLine();
 
         if (name.isEmpty()) {
             System.out.println("Name cannot be empty.");
@@ -164,14 +164,19 @@ public class Main {
                     + c.getAddress());
         }
     }
-    // CATEGORY Main here:
+    
+        // CATEGORY Main here:
 
     static void addCategory() {
         System.out.print("Enter Category Name: ");
-        String name = sc.nextLine();
+        String name = sc.nextLine().trim();
 
         if (name.isEmpty()) {
             System.out.println("Name cannot be empty.");
+            return;
+        }
+        if (categoryDAO.searchByName(name) != null) {
+            System.out.println("This category already exists.");
             return;
         }
 
@@ -186,16 +191,20 @@ public class Main {
 
     static void viewCategories() {
         List<Category> list = categoryDAO.getAllCategories();
+        printCategories(list);
+    }
 
-        if (list.isEmpty()) {
-            System.out.println("No categories found.");
-            return;
-        }
+    static void searchCategory() {
+        System.out.print("Enter Category Name to search: ");
+        String name = sc.nextLine().trim();
 
-        System.out.println("\nID\tName");
-        System.out.println("----------------");
-        for (Category c : list) {
-            System.out.println(c.getCategoryId() + "\t" + c.getCategoryName());
+        Category found = categoryDAO.searchByName(name);
+
+        if (found == null) {
+            System.out.println("Category not found.");
+        } else {
+            System.out.println("Found -> ID: " + found.getCategoryId()
+                             + ", Name: " + found.getCategoryName());
         }
     }
 
@@ -203,7 +212,12 @@ public class Main {
         System.out.print("Enter Category ID to update: ");
         int id = readInt();
         System.out.print("Enter new name: ");
-        String name = sc.nextLine();
+        String name = sc.nextLine().trim();
+
+        if (name.isEmpty()) {
+            System.out.println("Name cannot be empty.");
+            return;
+        }
 
         boolean ok = categoryDAO.updateCategory(new Category(id, name));
         if (ok) {
@@ -224,7 +238,20 @@ public class Main {
             System.out.println("Delete failed (ID not found or in use).");
         }
     }
-    
+
+    static void printCategories(List<Category> list) {
+        if (list.isEmpty()) {
+            System.out.println("No categories found.");
+            return;
+        }
+
+        System.out.println("\nID\tName");
+        System.out.println("----------------");
+        for (Category c : list) {
+            System.out.println(c.getCategoryId() + "\t" + c.getCategoryName());
+        }
+    }
+
     static int readInt() {
         try {
             return Integer.parseInt(sc.nextLine());
