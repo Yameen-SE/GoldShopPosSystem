@@ -53,11 +53,11 @@ public class Main {
 
     static void addCustomer() {
         System.out.print("Enter Customer Name: ");
-        String name = sc.nextLine();
+        String name = sc.nextLine().trim();
         System.out.print("Enter Phone Number: ");
-        String phone = sc.nextLine();
+        String phone = sc.nextLine().trim();
         System.out.print("Enter Address: ");
-        String address = sc.nextLine();
+        String address = sc.nextLine().trim();
 
         if (name.isEmpty()) {
             System.out.println("Name cannot be empty.");
@@ -76,19 +76,40 @@ public class Main {
 
     static void viewCustomer() {
         List<Customer> list = customerDAO.getAllCustomers();
+        printCustomers(list);
+    }
 
-        if (list.isEmpty()) {
-            System.out.println("No customers found.");
+    static void searchCustomerById() {
+        System.out.print("Enter Customer ID to search: ");
+        int id = readInt();
+
+        Customer found = customerDAO.searchById(id);
+
+        if (found == null) {
+            System.out.println("Customer not found.");
+        } else {
+            System.out.println("Found -> ID: " + found.getCustomerId()
+            + ", Name: " + found.getCustomerName()
+            + ", Phone: " + found.getPhone()
+            + ", Address: " + found.getAddress());
+        }
+    }
+
+    static void searchCustomerByName() {
+        System.out.print("Enter Customer Name to search: ");
+        String name = sc.nextLine().trim();
+
+        if (name.isEmpty()) {
+            System.out.println("Name cannot be empty.");
             return;
         }
 
-        System.out.println("\nID\tName\t\tPhone\t\tAddress");
-        System.out.println("------------------------------------------------");
-        for (Customer c : list) {
-            System.out.println(c.getCustomerId() + "\t"
-                    + c.getCustomerName() + "\t\t"
-                    + c.getPhone() + "\t"
-                    + c.getAddress());
+        List<Customer> list = customerDAO.searchByName(name);
+
+        if (list.isEmpty()) {
+            System.out.println("Customer not found.");
+        } else {
+            printCustomers(list);
         }
     }
 
@@ -97,11 +118,11 @@ public class Main {
         int id = readInt();
 
         System.out.print("Enter new Name: ");
-        String name = sc.nextLine();
+        String name = sc.nextLine().trim();
         System.out.print("Enter new Phone: ");
-        String phone = sc.nextLine();
+        String phone = sc.nextLine().trim();
         System.out.print("Enter new Address: ");
-        String address = sc.nextLine();
+        String address = sc.nextLine().trim();
 
         if (name.isEmpty()) {
             System.out.println("Name cannot be empty.");
@@ -128,6 +149,21 @@ public class Main {
         }
     }
 
+    static void printCustomers(List<Customer> list) {
+        if (list.isEmpty()) {
+            System.out.println("No customers found.");
+            return;
+        }
+
+        System.out.println("\nID\tName\t\tPhone\t\tAddress");
+        System.out.println("------------------------------------------------");
+        for (Customer c : list) {
+            System.out.println(c.getCustomerId() + "\t"
+                    + c.getCustomerName() + "\t\t"
+                    + c.getPhone() + "\t"
+                    + c.getAddress());
+        }
+    }
     // CATEGORY Main here:
 
     static void addCategory() {
