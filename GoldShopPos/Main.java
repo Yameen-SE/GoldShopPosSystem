@@ -12,27 +12,33 @@ public class Main {
         while (true) {
             System.out.println("\n=== Gold Shop Management System ===");
             System.out.println("1. Add Customer");
-            System.out.println("2. View Customer");
-            System.out.println("3. Update Customer");
-            System.out.println("4. Delete Customer");
-            System.out.println("5. Add Category");
-            System.out.println("6. View Categories");
-            System.out.println("7. Update Category");
-            System.out.println("8. Delete Category");
+            System.out.println("2. View Customers");
+            System.out.println("3. Search Customer by ID");
+            System.out.println("4. Search Customer by Name");
+            System.out.println("5. Update Customer");
+            System.out.println("6. Delete Customer");
+            System.out.println("7. Add Category");
+            System.out.println("8. View Categories");
+            System.out.println("9. Search Category by Name");
+            System.out.println("10. Update Category");
+            System.out.println("11. Delete Category");
             System.out.println("0. Exit");
             System.out.print("Choose: ");
 
             int choice = readInt();
 
             switch (choice) {
-                case 1: addCustomer();      break;
-                case 2: viewCustomer();     break;
-                case 3: updateCustomer();   break;
-                case 4: deleteCustomer();   break;
-                case 5: addCategory();      break;
-                case 6: viewCategories();   break;
-                case 7: updateCategory();   break;
-                case 8: deleteCategory();   break;
+                case 1: addCustomer();            break;
+                case 2: viewCustomer();           break;
+                case 3: searchCustomerById();     break;
+                case 4: searchCustomerByName();   break;
+                case 5: updateCustomer();         break;
+                case 6: deleteCustomer();         break;
+                case 7: addCategory();            break;
+                case 8: viewCategories();         break;
+                case 9: searchCategory();         break;
+                case 10: updateCategory();        break;
+                case 11: deleteCategory();        break;
                 case 0:
                     System.out.println("Goodbye!");
                     sc.close();
