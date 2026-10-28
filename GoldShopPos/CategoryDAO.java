@@ -9,10 +9,10 @@ public class CategoryDAO {
 
     public int addCategory(Category category) {
         String sql = "INSERT INTO CATEGORY (CATEGORY_ID, CATEGORY_NAME) "
-                   + "VALUES (CATEGORY_SEQ.NEXTVAL, ?)";
+                    + "VALUES (CATEGORY_SEQ.NEXTVAL, ?)";
 
         try (Connection con = DBConnection.getConnection();
-             PreparedStatement ps = con.prepareStatement(sql, new String[] {"CATEGORY_ID"})) {
+            PreparedStatement ps = con.prepareStatement(sql, new String[] {"CATEGORY_ID"})) {
 
             ps.setString(1, category.getCategoryName());
 
@@ -37,12 +37,12 @@ public class CategoryDAO {
         String sql = "SELECT CATEGORY_ID, CATEGORY_NAME FROM CATEGORY ORDER BY CATEGORY_ID";
 
         try (Connection con = DBConnection.getConnection();
-             PreparedStatement ps = con.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
                 list.add(new Category(rs.getInt("CATEGORY_ID"),
-                                      rs.getString("CATEGORY_NAME")));
+                                rs.getString("CATEGORY_NAME")));
             }
         } catch (SQLException e) {
             System.out.println("Error retrieving categories: " + e.getMessage());
@@ -54,7 +54,7 @@ public class CategoryDAO {
         String sql = "UPDATE CATEGORY SET CATEGORY_NAME = ? WHERE CATEGORY_ID = ?";
 
         try (Connection con = DBConnection.getConnection();
-             PreparedStatement ps = con.prepareStatement(sql)) {
+            PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setString(1, category.getCategoryName());
             ps.setInt(2, category.getCategoryId());
@@ -69,7 +69,7 @@ public class CategoryDAO {
         String sql = "DELETE FROM CATEGORY WHERE CATEGORY_ID = ?";
 
         try (Connection con = DBConnection.getConnection();
-             PreparedStatement ps = con.prepareStatement(sql)) {
+            PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setInt(1, categoryId);
             return ps.executeUpdate() == 1;
@@ -77,5 +77,18 @@ public class CategoryDAO {
             System.out.println("Error deleting category: " + e.getMessage());
             return false;
         }
+    }
+
+    // Linear search: check categories one by one
+    public Category searchByName(String name) {
+        List<Category> list = getAllCategories();
+
+        for (int i = 0; i < list.size(); i++) {
+            Category c = list.get(i);
+            if (c.getCategoryName().equalsIgnoreCase(name)) {
+                return c;
+            }
+        }
+        return null;
     }
 }
