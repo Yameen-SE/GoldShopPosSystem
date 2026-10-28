@@ -49,7 +49,7 @@ public class Main {
         }
     }
 
-    // ================= CUSTOMER =================
+    // CUSTOMER Main here:
 
     static void addCustomer() {
         System.out.print("Enter Customer Name: ");
@@ -128,7 +128,7 @@ public class Main {
         }
     }
 
-    // ================= CATEGORY =================
+    // CATEGORY Main here:
 
     static void addCategory() {
         System.out.print("Enter Category Name: ");
