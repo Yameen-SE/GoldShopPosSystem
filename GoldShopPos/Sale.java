@@ -31,4 +31,73 @@ public class Sale {
         this.paymentStatus = paymentStatus;
     }
 
+    public int getSaleId() {
+         return saleId;
+         }
+    public void setSaleId(int saleId) { 
+        this.saleId = saleId;
+         }
+
+    public int getCustomerId() { 
+        return customerId;
+         }
+    public void setCustomerId(int customerId) { 
+        this.customerId = customerId;
+         }
+
+    public int getItemId() { 
+        return itemId;
+         }
+    public void setItemId(int itemId) { 
+        this.itemId = itemId;
+         }
+
+    public Date getSaleDate() { 
+        return saleDate;
+         }
+    public void setSaleDate(Date saleDate) {
+         this.saleDate = saleDate; 
+        }
+
+    public int getQuantity() {
+         return quantity;
+        }
+    public void setQuantity(int quantity) { 
+        this.quantity = quantity; 
+        }
+
+    public double getWeight() { 
+        return weight; 
+        }
+    public void setWeight(double weight) { 
+        this.weight = weight;
+        }
+
+    public String getGoldPurity() { 
+        return goldPurity;
+        }
+    public void setGoldPurity(String goldPurity) { 
+        this.goldPurity = goldPurity;
+        }
+
+    public double getGoldRateUsed() { 
+        return goldRateUsed;
+        }
+    public void setGoldRateUsed(double goldRateUsed) { 
+        this.goldRateUsed = goldRateUsed;
+        }
+
+    public double getTotalAmount() { 
+        return totalAmount; 
+        }
+    public void setTotalAmount(double totalAmount) { 
+        this.totalAmount = totalAmount;
+        }
+
+    public String getPaymentStatus() { 
+        return paymentStatus; 
+        }
+    public void setPaymentStatus(String paymentStatus) { 
+        this.paymentStatus = paymentStatus;
+        }
 }
