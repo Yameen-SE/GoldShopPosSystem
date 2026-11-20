@@ -22,241 +22,559 @@ public class Main {
             System.out.println("9. Search Category by Name");
             System.out.println("10. Update Category");
             System.out.println("11. Delete Category");
-            System.out.println("0. Exit");
+             System.out.println("0. Exit");
+
             System.out.print("Choose: ");
 
             int choice = readInt();
 
-            switch (choice) {
-                case 1: addCustomer();            break;
-                case 2: viewCustomer();           break;
-                case 3: searchCustomerById();     break;
-                case 4: searchCustomerByName();   break;
-                case 5: updateCustomer();         break;
-                case 6: deleteCustomer();         break;
-                case 7: addCategory();            break;
-                case 8: viewCategories();         break;
-                case 9: searchCategory();         break;
-                case 10: updateCategory();        break;
-                case 11: deleteCategory();        break;
-                case 0:
-                    System.out.println("Goodbye!");
-                    sc.close();
-                    return;
-                default:
-                    System.out.println("Invalid choice.");
+            if (choice == 1) {
+                addCustomer();
+            }
+            else if (choice == 2) {
+                viewCustomer();
+            }
+            else if (choice == 3) {
+                searchCustomerById();
+            }
+            else if (choice == 4) {
+                searchCustomerByName();
+            }
+            else if (choice == 5) {
+                updateCustomer();
+            }
+            else if (choice == 6) {
+                deleteCustomer();
+            }
+            else if (choice == 7) {
+                addCategory();
+            }
+            else if (choice == 8) {
+                viewCategories();
+            }
+            else if (choice == 9) {
+                searchCategory();
+            }
+            else if (choice == 10) {
+                updateCategory();
+            }
+            else if (choice == 11) {
+                deleteCategory();
+            }
+            else if (choice == 0) {
+                System.out.println("Goodbye!");
+                sc.close();
+                return;
+            }
+            else {
+                System.out.println("Invalid choice. Enter 0-11.");
             }
         }
     }
 
-    // CUSTOMER Main here:
+    
 
     static void addCustomer() {
-        System.out.print("Enter Customer Name: ");
-        String name = sc.nextLine();
-        System.out.print("Enter Phone Number: ");
-        String phone = sc.nextLine();
-        System.out.print("Enter Address: ");
-        String address = sc.nextLine();
 
-        if (name.isEmpty()) {
-            System.out.println("Name cannot be empty.");
-            return;
+        try {
+
+            System.out.print("Enter Customer Name: ");
+            String name = sc.nextLine();
+
+            boolean empty = true;
+
+            for (int i = 0; i < name.length(); i++) {
+                if (name.charAt(i) != ' ') {
+                    empty = false;
+                    break;
+                }
+            }
+
+            if (empty == true) {
+                System.out.println("Name cannot be empty.");
+                return;
+            }
+
+            System.out.print("Enter Phone Number: ");
+            String phone = sc.nextLine();
+
+            boolean valid = true;
+
+            for (int i = 0; i < phone.length(); i++) {
+                if (phone.charAt(i) < '0' || phone.charAt(i) > '9') {
+                    valid = false;
+                    break;
+                }
+            }
+
+            if (valid == false || phone.length() == 0) {
+                System.out.println("Enter a valid phone number.");
+                return;
+            }
+
+            System.out.print("Enter Address: ");
+            String address = sc.nextLine();
+
+            empty = true;
+
+            for (int i = 0; i < address.length(); i++) {
+                if (address.charAt(i) != ' ') {
+                    empty = false;
+                    break;
+                }
+            }
+
+            if (empty == true) {
+                System.out.println("Address cannot be empty.");
+                return;
+            }
+
+            Customer customer = new Customer(name, phone, address);
+
+            int id = customerDAO.addCustomer(customer);
+
+            if (id > 0) {
+                System.out.println("Customer saved! ID: " + id);
+            }
+            else {
+                System.out.println("Customer could not be saved.");
+            }
+
         }
-
-        Customer customer = new Customer(name, phone, address);
-        int id = customerDAO.addCustomer(customer);
-
-        if (id > 0) {
-            System.out.println("Customer saved! ID: " + id);
-        } else {
-            System.out.println("Customer could not be saved.");
+        catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
         }
     }
+
 
     static void viewCustomer() {
-        List<Customer> list = customerDAO.getAllCustomers();
-        printCustomers(list);
-    }
 
-    static void searchCustomerById() {
-        System.out.print("Enter Customer ID to search: ");
-        int id = readInt();
-
-        Customer found = customerDAO.searchById(id);
-
-        if (found == null) {
-            System.out.println("Customer not found.");
-        } else {
-            System.out.println("Found -> ID: " + found.getCustomerId()
-            + ", Name: " + found.getCustomerName()
-            + ", Phone: " + found.getPhone()
-            + ", Address: " + found.getAddress());
-        }
-    }
-
-    static void searchCustomerByName() {
-        System.out.print("Enter Customer Name to search: ");
-        String name = sc.nextLine();
-
-        if (name.isEmpty()) {
-            System.out.println("Name cannot be empty.");
-            return;
-        }
-
-        List<Customer> list = customerDAO.searchByName(name);
-
-        if (list.isEmpty()) {
-            System.out.println("Customer not found.");
-        } else {
+        try {
+            List<Customer> list = customerDAO.getAllCustomers();
             printCustomers(list);
         }
+        catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
     }
+
+
+    static void searchCustomerById() {
+
+        try {
+
+            System.out.print("Enter Customer ID to search: ");
+            int id = readInt();
+
+            if (id <= 0) {
+                System.out.println("Invalid Customer ID.");
+                return;
+            }
+
+            Customer found = customerDAO.searchById(id);
+
+            if (found == null) {
+                System.out.println("Customer not found.");
+            }
+            else {
+                System.out.println("Customer ID: " + found.getCustomerId());
+                System.out.println("Name: " + found.getCustomerName());
+                System.out.println("Phone: " + found.getPhone());
+                System.out.println("Address: " + found.getAddress());
+            }
+
+        }
+        catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+
+    static void searchCustomerByName() {
+
+        try {
+
+            System.out.print("Enter Customer Name to search: ");
+            String name = sc.nextLine();
+
+            boolean empty = true;
+
+            for (int i = 0; i < name.length(); i++) {
+                if (name.charAt(i) != ' ') {
+                    empty = false;
+                    break;
+                }
+            }
+
+            if (empty == true) {
+                System.out.println("Name cannot be empty.");
+                return;
+            }
+
+            List<Customer> list = customerDAO.searchByName(name);
+
+            printCustomers(list);
+
+        }
+        catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
 
     static void updateCustomer() {
-        System.out.print("Enter Customer ID to update: ");
-        int id = readInt();
 
-        System.out.print("Enter new Name: ");
-        String name = sc.nextLine();
-        System.out.print("Enter new Phone: ");
-        String phone = sc.nextLine();
-        System.out.print("Enter new Address: ");
-        String address = sc.nextLine();
+        try {
 
-        if (name.isEmpty()) {
-            System.out.println("Name cannot be empty.");
-            return;
+            System.out.print("Enter Customer ID to update: ");
+            int id = readInt();
+
+            if (id <= 0) {
+                System.out.println("Invalid Customer ID.");
+                return;
+            }
+
+            System.out.print("Enter new Name: ");
+            String name = sc.nextLine();
+
+            boolean empty = true;
+
+            for (int i = 0; i < name.length(); i++) {
+                if (name.charAt(i) != ' ') {
+                    empty = false;
+                    break;
+                }
+            }
+
+            if (empty == true) {
+                System.out.println("Name cannot be empty.");
+                return;
+            }
+
+            System.out.print("Enter new Phone: ");
+            String phone = sc.nextLine();
+
+            boolean valid = true;
+
+            for (int i = 0; i < phone.length(); i++) {
+                if (phone.charAt(i) < '0' || phone.charAt(i) > '9') {
+                    valid = false;
+                    break;
+                }
+            }
+
+            if (valid == false || phone.length() == 0) {
+                System.out.println("Enter a valid phone number.");
+                return;
+            }
+
+            System.out.print("Enter new Address: ");
+            String address = sc.nextLine();
+
+            empty = true;
+
+            for (int i = 0; i < address.length(); i++) {
+                if (address.charAt(i) != ' ') {
+                    empty = false;
+                    break;
+                }
+            }
+
+            if (empty == true) {
+                System.out.println("Address cannot be empty.");
+                return;
+            }
+
+            Customer customer = new Customer(id, name, phone, address);
+
+            boolean result = customerDAO.updateCustomer(customer);
+
+            if (result == true) {
+                System.out.println("Customer updated.");
+            }
+            else {
+                System.out.println("Update failed.");
+            }
+
         }
-
-        boolean ok = customerDAO.updateCustomer(new Customer(id, name, phone, address));
-        if (ok) {
-            System.out.println("Customer updated.");
-        } else {
-            System.out.println("Update failed (ID not found?).");
+        catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
         }
     }
+
 
     static void deleteCustomer() {
-        System.out.print("Enter Customer ID to delete: ");
-        int id = readInt();
 
-        boolean ok = customerDAO.deleteCustomer(id);
-        if (ok) {
-            System.out.println("Customer deleted.");
-        } else {
-            System.out.println("Delete failed (ID not found or in use).");
+        try {
+
+            System.out.print("Enter Customer ID to delete: ");
+            int id = readInt();
+
+            if (id <= 0) {
+                System.out.println("Invalid Customer ID.");
+                return;
+            }
+
+            boolean result = customerDAO.deleteCustomer(id);
+
+            if (result == true) {
+                System.out.println("Customer deleted.");
+            }
+            else {
+                System.out.println("Delete failed.");
+            }
+
+        }
+        catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
         }
     }
+
 
     static void printCustomers(List<Customer> list) {
-        if (list.isEmpty()) {
-            System.out.println("No customers found.");
+
+        if (list == null) {
+            System.out.println("Unable to retrieve customers.");
             return;
         }
 
-        System.out.println("\nID\tName\t\tPhone\t\tAddress");
-        System.out.println("------------------------------------------------");
+        int count = 0;
+
         for (Customer c : list) {
-            System.out.println(c.getCustomerId() + "\t"
-                    + c.getCustomerName() + "\t\t"
-                    + c.getPhone() + "\t"
-                    + c.getAddress());
+            count++;
+        }
+
+        if (count == 0) {
+            System.out.println("No customers found.");
+        }
+        else {
+
+            System.out.println("\nID\tName\t\tPhone\t\tAddress");
+            System.out.println("-----------------------------------------------");
+
+            for (Customer c : list) {
+                System.out.println(c.getCustomerId() + "\t"
+                        + c.getCustomerName() + "\t\t"
+                        + c.getPhone() + "\t"
+                        + c.getAddress());
+            }
         }
     }
-    
-        // CATEGORY Main here:
+
+
+    // CATEGORY FUNCTIONS
 
     static void addCategory() {
-        System.out.print("Enter Category Name: ");
-        String name = sc.nextLine().trim();
 
-        if (name.isEmpty()) {
-            System.out.println("Name cannot be empty.");
-            return;
+        try {
+
+            System.out.print("Enter Category Name: ");
+            String name = sc.nextLine();
+
+            boolean empty = true;
+
+            for (int i = 0; i < name.length(); i++) {
+                if (name.charAt(i) != ' ') {
+                    empty = false;
+                    break;
+                }
+            }
+
+            if (empty == true) {
+                System.out.println("Category name cannot be empty.");
+                return;
+            }
+
+            Category found = categoryDAO.searchByName(name);
+
+            if (found != null) {
+                System.out.println("This category already exists.");
+                return;
+            }
+
+            int id = categoryDAO.addCategory(new Category(name));
+
+            if (id > 0) {
+                System.out.println("Category saved! ID: " + id);
+            }
+            else {
+                System.out.println("Category could not be saved.");
+            }
+
         }
-        if (categoryDAO.searchByName(name) != null) {
-            System.out.println("This category already exists.");
-            return;
-        }
-
-        int id = categoryDAO.addCategory(new Category(name));
-
-        if (id > 0) {
-            System.out.println("Category saved! ID: " + id);
-        } else {
-            System.out.println("Category could not be saved.");
+        catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
         }
     }
+
 
     static void viewCategories() {
-        List<Category> list = categoryDAO.getAllCategories();
-        printCategories(list);
+
+        try {
+            List<Category> list = categoryDAO.getAllCategories();
+            printCategories(list);
+        }
+        catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
     }
+
 
     static void searchCategory() {
-        System.out.print("Enter Category Name to search: ");
-        String name = sc.nextLine().trim();
 
-        Category found = categoryDAO.searchByName(name);
+        try {
 
-        if (found == null) {
-            System.out.println("Category not found.");
-        } else {
-            System.out.println("Found -> ID: " + found.getCategoryId()
-                             + ", Name: " + found.getCategoryName());
+            System.out.print("Enter Category Name to search: ");
+            String name = sc.nextLine();
+
+            boolean empty = true;
+
+            for (int i = 0; i < name.length(); i++) {
+                if (name.charAt(i) != ' ') {
+                    empty = false;
+                    break;
+                }
+            }
+
+            if (empty == true) {
+                System.out.println("Category name cannot be empty.");
+                return;
+            }
+
+            Category found = categoryDAO.searchByName(name);
+
+            if (found == null) {
+                System.out.println("Category not found.");
+            }
+            else {
+                System.out.println("Category ID: " + found.getCategoryId());
+                System.out.println("Category Name: " + found.getCategoryName());
+            }
+
+        }
+        catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
         }
     }
+
 
     static void updateCategory() {
-        System.out.print("Enter Category ID to update: ");
-        int id = readInt();
-        System.out.print("Enter new name: ");
-        String name = sc.nextLine().trim();
 
-        if (name.isEmpty()) {
-            System.out.println("Name cannot be empty.");
-            return;
+        try {
+
+            System.out.print("Enter Category ID to update: ");
+            int id = readInt();
+
+            if (id <= 0) {
+                System.out.println("Invalid Category ID.");
+                return;
+            }
+
+            System.out.print("Enter new Category Name: ");
+            String name = sc.nextLine();
+
+            boolean empty = true;
+
+            for (int i = 0; i < name.length(); i++) {
+                if (name.charAt(i) != ' ') {
+                    empty = false;
+                    break;
+                }
+            }
+
+            if (empty == true) {
+                System.out.println("Category name cannot be empty.");
+                return;
+            }
+
+            Category category = new Category(id, name);
+
+            boolean result = categoryDAO.updateCategory(category);
+
+            if (result == true) {
+                System.out.println("Category updated.");
+            }
+            else {
+                System.out.println("Update failed.");
+            }
+
         }
-
-        boolean ok = categoryDAO.updateCategory(new Category(id, name));
-        if (ok) {
-            System.out.println("Category updated.");
-        } else {
-            System.out.println("Update failed (ID not found?).");
+        catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
         }
     }
+
 
     static void deleteCategory() {
-        System.out.print("Enter Category ID to delete: ");
-        int id = readInt();
 
-        boolean ok = categoryDAO.deleteCategory(id);
-        if (ok) {
-            System.out.println("Category deleted.");
-        } else {
-            System.out.println("Delete failed (ID not found or in use).");
+        try {
+
+            System.out.print("Enter Category ID to delete: ");
+            int id = readInt();
+
+            if (id <= 0) {
+                System.out.println("Invalid Category ID.");
+                return;
+            }
+
+            boolean result = categoryDAO.deleteCategory(id);
+
+            if (result == true) {
+                System.out.println("Category deleted.");
+            }
+            else {
+                System.out.println("Delete failed.");
+            }
+
+        }
+        catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
         }
     }
 
+
     static void printCategories(List<Category> list) {
-        if (list.isEmpty()) {
-            System.out.println("No categories found.");
+
+        if (list == null) {
+            System.out.println("Unable to retrieve categories.");
             return;
         }
 
-        System.out.println("\nID\tName");
-        System.out.println("----------------");
+        int count = 0;
+
         for (Category c : list) {
-            System.out.println(c.getCategoryId() + "\t" + c.getCategoryName());
+            count++;
+        }
+
+        if (count == 0) {
+            System.out.println("No categories found.");
+        }
+        else {
+
+            System.out.println("\nID\tCategory Name");
+            System.out.println("-------------------------");
+
+            for (Category c : list) {
+                System.out.println(c.getCategoryId() + "\t"
+                        + c.getCategoryName());
+            }
         }
     }
 
+
     static int readInt() {
+
         try {
-            return Integer.parseInt(sc.nextLine());
-        } catch (NumberFormatException e) {
+
+            int number = Integer.parseInt(sc.nextLine());
+
+            return number;
+
+        }
+        catch (NumberFormatException e) {
+            System.out.println("Please enter a valid number.");
             return -1;
         }
     }
+
 }
