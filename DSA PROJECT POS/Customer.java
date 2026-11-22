@@ -12,4 +12,12 @@ public class Customer {
         this.Phone = Phone;
         this.Address = Address;
     }
-    
+
+    public void displayCustomer() {
+
+        System.out.println("Customer ID: " + CustomerID);
+        System.out.println("Customer Name: " + CustomerName);
+        System.out.println("Phone: " + Phone);
+        System.out.println("Address: " + Address);
+    }
+}
