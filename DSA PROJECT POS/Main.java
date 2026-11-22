@@ -41,3 +41,19 @@ public class Main {
                     else {
                         System.out.print("Enter Customer Name: ");
                         String name = input.nextLine();
+
+
+
+ 
+                        
+                    else if (choice == 3) {
+
+                    if (V == A.length - 1) {
+
+                        System.out.println("Category Array is Full");
+                    }
+                    else {
+                        System.out.print("Enter Category Name: ");
+                        String name = input.nextLine();
+
+                        
