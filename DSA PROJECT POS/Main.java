@@ -30,3 +30,14 @@ public class Main {
                 System.out.print("Enter your choice: ");
                 int choice = input.nextInt();
                 input.nextLine();
+
+                if (choice == 1) {
+                
+                    if (U == C.length - 1) {
+
+                        System.out.println("Customer Array is Full");
+
+                    }
+                    else {
+                        System.out.print("Enter Customer Name: ");
+                        String name = input.nextLine();
