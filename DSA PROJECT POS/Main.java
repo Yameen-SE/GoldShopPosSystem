@@ -85,3 +85,9 @@ public class Main {
                         System.out.println("No Categories Available");
 
                     }
+
+                        else {
+
+                        System.out.println("===== CATEGORY RECORDS =====");
+
+                }
