@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 public class Main {
 
@@ -7,8 +8,13 @@ public class Main {
         Scanner input = new Scanner(System.in);
 
         Customer[] C = new Customer[15];
+        Category[] A = new Category[15];
+
         int U = -1;
+        int V = -1;
+
         int customerID = 0;
+        int categoryID = 0;
 
         while (true) {
 
@@ -17,10 +23,10 @@ public class Main {
                 System.out.println("===== GOLD SHOP POS SYSTEM =====");
                 System.out.println("1. Add Customer");
                 System.out.println("2. Display Customers");
+                System.out.println("3. Add Category");
+                System.out.println("4. Display Categories");
+                System.out.println("5. Exit");
 
                 System.out.print("Enter your choice: ");
                 int choice = input.nextInt();
                 input.nextLine();
-
-
-          
