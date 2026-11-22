@@ -77,3 +77,11 @@ public class Main {
                         System.out.println("Category Inserted Successfully!");
                     }
                 }
+
+                       else if (choice == 4) {
+
+                    if (V == -1) {
+
+                        System.out.println("No Categories Available");
+
+                    }
