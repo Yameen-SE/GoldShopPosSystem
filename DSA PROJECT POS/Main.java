@@ -90,4 +90,11 @@ public class Main {
 
                         System.out.println("===== CATEGORY RECORDS =====");
 
+                         for (int i = 0; i <= V; i++) {
+
+                            A[i].displayCategory();
+                            System.out.println("--------------------");
+                        }
+                    }
+
                 }
