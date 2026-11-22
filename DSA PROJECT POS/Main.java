@@ -68,4 +68,12 @@ public class Main {
                          }
                      }   
 
-                    
+                     V = V + 1;
+
+                        A[V] = new Category(categoryID, name);
+
+                        categoryID++;
+
+                        System.out.println("Category Inserted Successfully!");
+                    }
+                }
