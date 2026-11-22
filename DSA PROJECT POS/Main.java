@@ -56,4 +56,7 @@ public class Main {
                         System.out.print("Enter Category Name: ");
                         String name = input.nextLine();
 
+                     if (name.length() < 3) {
+                            throw new IllegalArgumentException("Name must contain at least 3 characters.");
+                        }
                         
