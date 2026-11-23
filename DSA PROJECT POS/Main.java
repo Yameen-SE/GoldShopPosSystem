@@ -62,8 +62,17 @@ public class Main {
                             throw new IllegalArgumentException("Phone number must be exactly 11 digits.");
                         }
 
+                        for (int i = 0; i < phone.length(); i++) {
+
+                            char ch = phone.charAt(i);
+
+                            if (ch < '0' || ch > '9') {
+                                throw new IllegalArgumentException("Phone number must contain digits only.");
+                            }
+                        }
                         
 
+                        
                         
                     else if (choice == 3) {
 
