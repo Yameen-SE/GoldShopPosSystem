@@ -46,13 +46,8 @@ public class Main {
                             throw new IllegalArgumentException("Name must contain at least 3 characters.");
                         }
 
-                        for (int i = 0; i < name.length(); i++) {
-
-                            char ch = name.charAt(i);
-
-                            if (!Character.isLetter(ch) && ch != ' ') {
-                                throw new IllegalArgumentException("Name cannot contain numbers or symbols.");
-                            }
+                        if (!name.matches("[a-zA-Z ]+")) {
+                            throw new IllegalArgumentException("Name cannot contain numbers or symbols.");
                         }
 
                         System.out.print("Enter Phone Number: ");
@@ -62,13 +57,8 @@ public class Main {
                             throw new IllegalArgumentException("Phone number must be exactly 11 digits.");
                         }
 
-                        for (int i = 0; i < phone.length(); i++) {
-
-                            char ch = phone.charAt(i);
-
-                            if (ch < '0' || ch > '9') {
-                                throw new IllegalArgumentException("Phone number must contain digits only.");
-                            }
+                        if (!phone.matches("[0-9]{11}")) {
+                            throw new IllegalArgumentException("Phone number must be exactly 11 digits.");
                         }
                         
                         System.out.print("Enter Address: ");
