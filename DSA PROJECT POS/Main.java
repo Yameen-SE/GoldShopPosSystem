@@ -30,7 +30,7 @@ public class Main {
                 System.out.print("Enter your choice: ");
                 int choice = input.nextInt();
                 input.nextLine();
-
+                
                 if (choice == 1) {
                 
                     if (U == C.length - 1) {
@@ -39,6 +39,7 @@ public class Main {
 
                     }
                     else {
+
                         System.out.print("Enter Customer Name: ");
                         String name = input.nextLine();
 
@@ -60,7 +61,7 @@ public class Main {
                         if (!phone.matches("[0-9]{11}")) {
                             throw new IllegalArgumentException("Phone number must be exactly 11 digits.");
                         }
-                        
+
                         System.out.print("Enter Address: ");
                         String address = input.nextLine();
 
@@ -73,7 +74,7 @@ public class Main {
                         System.out.println("Customer Inserted Successfully!");
                     }
                 }
-
+                
                 else if (choice == 2) {
 
                     if (U == -1) {
@@ -92,10 +93,9 @@ public class Main {
                         }
                     }
                 }
-
                 
                 else if (choice == 3) {
-                    
+
                     if (V == A.length - 1) {
 
                         System.out.println("Category Array is Full");
@@ -104,14 +104,15 @@ public class Main {
                         System.out.print("Enter Category Name: ");
                         String name = input.nextLine();
 
-                     if (name.length() < 3) {
+                        if (name.length() < 3) {
                             throw new IllegalArgumentException("Name must contain at least 3 characters.");
                         }
-                     if (!name.matches("[a-zA-Z ]+")) {
+
+                        if (!name.matches("[a-zA-Z ]+")) {
                             throw new IllegalArgumentException("Name cannot contain numbers or symbols.");
                         }
 
-                     V = V + 1;
+                        V = V + 1;
 
                         A[V] = new Category(categoryID, name);
 
@@ -120,28 +121,26 @@ public class Main {
                         System.out.println("Category Inserted Successfully!");
                     }
                 }
-
-                       else if (choice == 4) {
+                
+                else if (choice == 4) {
 
                     if (V == -1) {
 
                         System.out.println("No Categories Available");
 
                     }
-
-                        else {
+                    else {
 
                         System.out.println("===== CATEGORY RECORDS =====");
 
-                         for (int i = 0; i <= V; i++) {
+                        for (int i = 0; i <= V; i++) {
 
                             A[i].displayCategory();
                             System.out.println("--------------------");
                         }
                     }
-
                 }
-
+                
                 else if (choice == 5) {
 
                     System.out.println("Thank You for Using Gold Shop POS!");
