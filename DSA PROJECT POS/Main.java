@@ -33,7 +33,9 @@ public class Main {
                 System.out.println("4. Display Categories");
                 System.out.println("5. Add Item");
                 System.out.println("6. Display Items");
-                System.out.println("7. Exit");
+                System.out.println("7. Add Inventory");
+                System.out.println("8. Display Inventory");
+                System.out.println("9. Exit"); 
 
                 System.out.print("Enter your choice: ");
                 int choice = input.nextInt();
@@ -252,8 +254,67 @@ public class Main {
                         }
                     }
                 }
-                
+
                 else if (choice == 7) {
+
+                    if (X == Inv.length - 1) {
+
+                        System.out.println("Inventory Array is Full");
+
+                    }
+                    else if (W == -1) {
+
+                        System.out.println("Please Add an Item First");
+
+                    }
+                    else {
+
+                        System.out.println("===== AVAILABLE ITEMS =====");
+
+                        for (int i = 0; i <= W; i++) {
+
+                            Ite[i].displayItem();
+                            System.out.println("--------------------");
+                        }
+
+                        System.out.print("Enter Item ID: ");
+                        int selectedItemID = input.nextInt();
+                        input.nextLine();
+
+                        boolean found = false;
+
+                        for (int i = 0; i <= W; i++) {
+
+                            if (Ite[i].ItemID == selectedItemID) {
+
+                                found = true;
+                                break;
+                            }
+                        }
+
+                        if (!found) {
+                            throw new IllegalArgumentException("Invalid Item ID.");
+                        }
+
+                        System.out.print("Enter Stock Quantity: ");
+                        int stockLeft = input.nextInt();
+                        input.nextLine();
+
+                        if (stockLeft <= 0) {
+                            throw new IllegalArgumentException("Stock must be greater than zero.");
+                        }
+
+                        X = X + 1;
+
+                        Inv[X] = new Inventory(inventoryID, selectedItemID, stockLeft);
+
+                        inventoryID++;
+
+                        System.out.println("Inventory Inserted Successfully!");
+                    }
+                }
+                
+                else if (choice == 9) {
 
                     System.out.println("Thank You for Using Gold Shop POS!");
                     break;
