@@ -55,6 +55,15 @@ public class Main {
                             }
                         }
 
+                        System.out.print("Enter Phone Number: ");
+                        String phone = input.nextLine();
+
+                        if (phone.length() != 11) {
+                            throw new IllegalArgumentException("Phone number must be exactly 11 digits.");
+                        }
+
+                        
+
                         
                     else if (choice == 3) {
 
