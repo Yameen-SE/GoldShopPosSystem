@@ -84,7 +84,24 @@ public class Main {
                     }
                 }
 
-                
+                else if (choice == 2) {
+
+                    if (U == -1) {
+
+                        System.out.println("No Customers Available");
+
+                    }
+                    else {
+
+                        System.out.println("===== CUSTOMER RECORDS =====");
+
+                        for (int i = 0; i <= U; i++) {
+
+                            C[i].displayCustomer();
+                            System.out.println("--------------------");
+                        }
+                    }
+                }
 
                 
                 else if (choice == 3) {
