@@ -313,6 +313,25 @@ public class Main {
                         System.out.println("Inventory Inserted Successfully!");
                     }
                 }
+
+                else if (choice == 8) {
+
+                    if (X == -1) {
+
+                        System.out.println("No Inventory Available");
+
+                    }
+                    else {
+
+                        System.out.println("===== INVENTORY RECORDS =====");
+
+                        for (int i = 0; i <= X; i++) {
+
+                            Inv[i].displayInventory();
+                            System.out.println("--------------------");
+                        }
+                    }
+                }
                 
                 else if (choice == 9) {
 
