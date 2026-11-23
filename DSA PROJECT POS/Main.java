@@ -42,9 +42,19 @@ public class Main {
                         System.out.print("Enter Customer Name: ");
                         String name = input.nextLine();
 
+                        if (name.length() < 3) {
+                            throw new IllegalArgumentException("Name must contain at least 3 characters.");
+                        }
 
+                        for (int i = 0; i < name.length(); i++) {
 
- 
+                            char ch = name.charAt(i);
+
+                            if (!Character.isLetter(ch) && ch != ' ') {
+                                throw new IllegalArgumentException("Name cannot contain numbers or symbols.");
+                            }
+                        }
+
                         
                     else if (choice == 3) {
 
