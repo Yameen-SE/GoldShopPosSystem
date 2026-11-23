@@ -232,6 +232,25 @@ public class Main {
                         System.out.println("Item Inserted Successfully!");
                     }
                 }
+
+                else if (choice == 6) {
+
+                    if (W == -1) {
+
+                        System.out.println("No Items Available");
+
+                    }
+                    else {
+
+                        System.out.println("===== ITEM RECORDS =====");
+
+                        for (int i = 0; i <= W; i++) {
+
+                            Ite[i].displayItem();
+                            System.out.println("--------------------");
+                        }
+                    }
+                }
                 
                 else if (choice == 9) {
 
