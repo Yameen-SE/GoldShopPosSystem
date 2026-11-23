@@ -156,3 +156,36 @@ public class Main {
                     }
 
                 }
+
+                else if (choice == 5) {
+
+                    System.out.println("Thank You for Using Gold Shop POS!");
+                    break;
+
+                }
+
+                else {
+
+                    System.out.println("Invalid Choice! Try Again.");
+
+                }
+            }
+
+            catch (InputMismatchException e) {
+
+                System.out.println("Error: Please enter numbers only for menu choice.");
+
+                input.nextLine();
+
+            }
+
+            catch (IllegalArgumentException e) {
+
+                System.out.println("Error: " + e.getMessage());
+
+            }
+        }
+
+        input.close();
+    }
+}
