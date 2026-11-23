@@ -33,9 +33,7 @@ public class Main {
                 System.out.println("4. Display Categories");
                 System.out.println("5. Add Item");
                 System.out.println("6. Display Items");
-                System.out.println("7. Add Inventory");
-                System.out.println("8. Display Inventory");
-                System.out.println("9. Exit");
+                System.out.println("7. Exit");
 
                 System.out.print("Enter your choice: ");
                 int choice = input.nextInt();
@@ -255,7 +253,7 @@ public class Main {
                     }
                 }
                 
-                else if (choice == 9) {
+                else if (choice == 7) {
 
                     System.out.println("Thank You for Using Gold Shop POS!");
                     break;
