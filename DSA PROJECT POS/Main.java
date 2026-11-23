@@ -147,8 +147,93 @@ public class Main {
                         }
                     }
                 }
-                
+
                 else if (choice == 5) {
+
+                    if (W == Ite.length - 1) {
+
+                        System.out.println("Item Array is Full");
+
+                    }
+                    else if (V == -1) {
+
+                        System.out.println("Please Add a Category First");
+
+                    }
+                    else {
+
+                        System.out.print("Enter Item Name: ");
+                        String name = input.nextLine();
+
+                        if (name.length() < 3) {
+                            throw new IllegalArgumentException("Item Name must contain at least 3 characters.");
+                        }
+
+                        if (!name.matches("[a-zA-Z ]+")) {
+                            throw new IllegalArgumentException("Item Name cannot contain numbers or symbols.");
+                        }
+
+                        System.out.println("===== AVAILABLE CATEGORIES =====");
+
+                        for (int i = 0; i <= V; i++) {
+
+                            A[i].displayCategory();
+                            System.out.println("--------------------");
+                        }
+
+                        System.out.print("Enter Category ID: ");
+                        int catID = input.nextInt();
+                        input.nextLine();
+
+                        boolean found = false;
+
+                        for (int i = 0; i <= V; i++) {
+
+                            if (A[i].CategoryID == catID) {
+
+                                found = true;
+                                break;
+                            }
+                        }
+
+                        if (!found) {
+                            throw new IllegalArgumentException("Invalid Category ID.");
+                        }
+
+                        System.out.print("Enter Gold Purity (22K / 21K / 18K): ");
+                        String purity = input.nextLine();
+
+                        if (!purity.matches("(22K|21K|18K)")) {
+                            throw new IllegalArgumentException("Invalid Gold Purity.");
+                        }
+
+                        System.out.print("Enter Weight in Grams: ");
+                        double weight = input.nextDouble();
+                        input.nextLine();
+
+                        if (weight <= 0) {
+                            throw new IllegalArgumentException("Weight must be greater than zero.");
+                        }
+
+                        System.out.print("Enter Price: ");
+                        double price = input.nextDouble();
+                        input.nextLine();
+
+                        if (price <= 0) {
+                            throw new IllegalArgumentException("Price must be greater than zero.");
+                        }
+
+                        W = W + 1;
+
+                        Ite[W] = new Item(itemID, name, catID, purity, weight, price);
+
+                        itemID++;
+
+                        System.out.println("Item Inserted Successfully!");
+                    }
+                }
+                
+                else if (choice == 9) {
 
                     System.out.println("Thank You for Using Gold Shop POS!");
                     break;
