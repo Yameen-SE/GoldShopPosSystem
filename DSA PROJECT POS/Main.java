@@ -10,14 +10,17 @@ public class Main {
         Customer[] C = new Customer[15];
         Category[] A = new Category[15];
         Item[] Ite = new Item[15];
+        Inventory[] Inv = new Inventory[15];
 
         int U = -1;
         int V = -1;
         int W = -1;
+        int X = -1;
 
         int customerID = 0;
         int categoryID = 0;
         int itemID = 0;
+        int inventoryID = 0;
 
         while (true) {
 
