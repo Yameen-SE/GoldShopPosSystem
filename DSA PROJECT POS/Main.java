@@ -71,11 +71,24 @@ public class Main {
                             }
                         }
                         
+                        System.out.print("Enter Address: ");
+                        String address = input.nextLine();
 
-                        
-                        
-                    else if (choice == 3) {
+                        U = U + 1;
 
+                        C[U] = new Customer(customerID, name, phone, address);
+
+                        customerID++;
+
+                        System.out.println("Customer Inserted Successfully!");
+                    }
+                }
+
+                
+
+                
+                else if (choice == 3) {
+                    
                     if (V == A.length - 1) {
 
                         System.out.println("Category Array is Full");
