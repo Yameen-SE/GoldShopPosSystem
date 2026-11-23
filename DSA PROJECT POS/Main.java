@@ -9,12 +9,15 @@ public class Main {
 
         Customer[] C = new Customer[15];
         Category[] A = new Category[15];
+        Item[] Ite = new Item[15];
 
         int U = -1;
         int V = -1;
+        int W = -1;
 
         int customerID = 0;
         int categoryID = 0;
+        int itemID = 0;
 
         while (true) {
 
@@ -25,7 +28,11 @@ public class Main {
                 System.out.println("2. Display Customers");
                 System.out.println("3. Add Category");
                 System.out.println("4. Display Categories");
-                System.out.println("5. Exit");
+                System.out.println("5. Add Item");
+                System.out.println("6. Display Items");
+                System.out.println("7. Add Inventory");
+                System.out.println("8. Display Inventory");
+                System.out.println("9. Exit");
 
                 System.out.print("Enter your choice: ");
                 int choice = input.nextInt();
