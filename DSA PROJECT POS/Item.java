@@ -24,7 +24,7 @@ public class Item {
         System.out.println("Category ID: " + CategoryID);
         System.out.println("Gold Purity: " + GoldPurity);
         System.out.println("Weight: " + Weight + " grams");
-        System.out.println("Price: " + Price);
+        System.out.println("Price: " + Price + "RS");
     }
 }
 
