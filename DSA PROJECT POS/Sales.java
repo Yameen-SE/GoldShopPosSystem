@@ -2,12 +2,13 @@ public class Sales {
 
     int SaleID;
     int CustomerID;
-    String ItemName;
-    String SaleDate;
+    int ItemID;
     double Weight;
     String GoldPurity;
     double GoldRateUsed;
-    int Quantity;
+    double MakingCharges;
     double TotalAmount;
     String PaymentStatus;
+    double AmountPaid;
+    String SaleDate;
 }
