@@ -1,4 +1,4 @@
-public class Sale {
+public class Sales {
 
     int SaleID;
     int CustomerID;
